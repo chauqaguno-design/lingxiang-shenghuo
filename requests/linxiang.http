@@ -1,0 +1,20 @@
+@base = http://127.0.0.1:18081
+@token = replace-with-demo-login-token
+
+### 演示登录
+POST {{base}}/demo/login
+Content-Type: application/json
+
+{"phone":"13800000001"}
+
+### 商户与券
+GET {{base}}/voucher/list/1
+
+### 抢券；返回的订单号要继续查结果
+POST {{base}}/voucher-order/seckill/101
+authorization: {{token}}
+X-Request-Id: demo-request-001
+
+### 查看自己的订单
+GET {{base}}/voucher-order/my
+authorization: {{token}}

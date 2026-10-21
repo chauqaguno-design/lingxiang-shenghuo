@@ -1,0 +1,34 @@
+{
+  "capturedAt": "2026-10-21T16:41:39.861390+08:00",
+  "orderId": "651017751019651132",
+  "voucherId": 106,
+  "ttlSeconds": 6,
+  "delayLevel": 2,
+  "observedStates": [
+    [
+      "RESERVED",
+      null
+    ],
+    [
+      "SUCCEEDED",
+      1
+    ],
+    [
+      "SUCCEEDED",
+      4
+    ]
+  ],
+  "databaseStockBeforeAfter": [
+    20,
+    20
+  ],
+  "redisStockBeforeAfter": [
+    20,
+    20
+  ],
+  "cancelReleaseEvents": 1,
+  "expiredPaymentRejected": true,
+  "duplicateCloseRelayed": true,
+  "result": "passed",
+  "note": "延迟消息早于6秒截止时间时由扫描补关；重投关闭事件后库存未重复回补。"
+}

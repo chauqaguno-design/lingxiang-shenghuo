@@ -1,0 +1,12 @@
+timeStamp,elapsed,label,responseCode,responseMessage,threadName,dataType,success,failureMessage,bytes,sentBytes,grpThreads,allThreads,URL,Latency,IdleTime,Connect,"businessOutcome","orderId","businessMessage"
+1792571709134,48,01_demo_login,200,,独立用户抢同一张券 1-1,text,true,,231,199,1,1,http://127.0.0.1:18081/demo/login,45,0,27,login,,
+1792571709299,31,02_seckill,200,,独立用户抢同一张券 1-1,text,true,,217,239,1,1,http://127.0.0.1:18081/voucher-order/seckill/102,31,0,0,accepted,651016148996849719,
+1792571709376,60,02_seckill,200,,独立用户抢同一张券 1-1,text,true,,222,239,1,1,http://127.0.0.1:18081/voucher-order/seckill/102,60,0,0,rejected,,每人限购一张
+1792571709438,29,02_seckill,200,,独立用户抢同一张券 1-1,text,true,,222,239,1,1,http://127.0.0.1:18081/voucher-order/seckill/102,29,0,0,rejected,,每人限购一张
+1792571709469,34,02_seckill,200,,独立用户抢同一张券 1-1,text,true,,222,239,1,1,http://127.0.0.1:18081/voucher-order/seckill/102,34,0,0,rejected,,每人限购一张
+1792571709504,30,02_seckill,200,,独立用户抢同一张券 1-1,text,true,,222,239,1,1,http://127.0.0.1:18081/voucher-order/seckill/102,30,0,0,rejected,,每人限购一张
+1792571709536,10,02_seckill,429,,独立用户抢同一张券 1-1,text,false,,240,239,1,1,http://127.0.0.1:18081/voucher-order/seckill/102,9,0,0,rate_limited,,操作过于频繁，请稍后重试
+1792571709547,6,02_seckill,429,,独立用户抢同一张券 1-1,text,false,,240,239,1,1,http://127.0.0.1:18081/voucher-order/seckill/102,6,0,0,rate_limited,,操作过于频繁，请稍后重试
+1792571709554,5,02_seckill,429,,独立用户抢同一张券 1-1,text,false,,240,239,1,1,http://127.0.0.1:18081/voucher-order/seckill/102,5,0,0,rate_limited,,操作过于频繁，请稍后重试
+1792571709560,5,02_seckill,429,,独立用户抢同一张券 1-1,text,false,,240,239,1,1,http://127.0.0.1:18081/voucher-order/seckill/102,5,0,0,rate_limited,,操作过于频繁，请稍后重试
+1792571709567,4,02_seckill,429,,独立用户抢同一张券 1-1,text,false,,240,239,1,1,http://127.0.0.1:18081/voucher-order/seckill/102,4,0,0,rate_limited,,操作过于频繁，请稍后重试

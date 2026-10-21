@@ -1,0 +1,191 @@
+{
+  "testedAt": "2026-10-21T16:44:58.6940016+08:00",
+  "target": "linxiang-redis",
+  "redisVersion": "7.2.10",
+  "namespace": "test:linxiang:273cda00aba646009d730b013d83c4d9",
+  "checks": [
+    {
+      "check": "首次预占成功",
+      "expected": "0",
+      "actual": "0",
+      "passed": true
+    },
+    {
+      "check": "首次预占仅扣一份",
+      "expected": "1",
+      "actual": "1",
+      "passed": true
+    },
+    {
+      "check": "相同订单重试幂等成功",
+      "expected": "0",
+      "actual": "0",
+      "passed": true
+    },
+    {
+      "check": "重试没有再次扣库存",
+      "expected": "1",
+      "actual": "1",
+      "passed": true
+    },
+    {
+      "check": "同用户另一订单被拒绝",
+      "expected": "2",
+      "actual": "2",
+      "passed": true
+    },
+    {
+      "check": "第二位用户成功",
+      "expected": "0",
+      "actual": "0",
+      "passed": true
+    },
+    {
+      "check": "库存恰好为零",
+      "expected": "0",
+      "actual": "0",
+      "passed": true
+    },
+    {
+      "check": "库存耗尽后拒绝第三位用户",
+      "expected": "1",
+      "actual": "1",
+      "passed": true
+    },
+    {
+      "check": "库存没有变负数",
+      "expected": "0",
+      "actual": "0",
+      "passed": true
+    },
+    {
+      "check": "取消已建订单释放一次",
+      "expected": "1",
+      "actual": "1",
+      "passed": true
+    },
+    {
+      "check": "重复取消返回已处理",
+      "expected": "0",
+      "actual": "0",
+      "passed": true
+    },
+    {
+      "check": "重复取消合计仅增加一份",
+      "expected": "1",
+      "actual": "1",
+      "passed": true
+    },
+    {
+      "check": "取消后保留一人一券参与记录",
+      "expected": "1",
+      "actual": "1",
+      "passed": true
+    },
+    {
+      "check": "取消后不能再次抢同活动",
+      "expected": "2",
+      "actual": "2",
+      "passed": true
+    },
+    {
+      "check": "其他用户可抢回补名额",
+      "expected": "0",
+      "actual": "0",
+      "passed": true
+    },
+    {
+      "check": "建单前补偿成功",
+      "expected": "1",
+      "actual": "1",
+      "passed": true
+    },
+    {
+      "check": "建单前补偿移除参与记录",
+      "expected": "0",
+      "actual": "0",
+      "passed": true
+    },
+    {
+      "check": "建单前补偿后新订单可再抢",
+      "expected": "0",
+      "actual": "0",
+      "passed": true
+    },
+    {
+      "check": "错误用户不能释放别人的预占",
+      "expected": "-1",
+      "actual": "-1",
+      "passed": true
+    },
+    {
+      "check": "错误释放没有增加库存",
+      "expected": "0",
+      "actual": "0",
+      "passed": true
+    },
+    {
+      "check": "已释放旧订单不能重新预占",
+      "expected": "4",
+      "actual": "4",
+      "passed": true
+    },
+    {
+      "check": "已结束活动拒绝新请求",
+      "expected": "7",
+      "actual": "7",
+      "passed": true
+    },
+    {
+      "check": "未开始活动拒绝新请求",
+      "expected": "6",
+      "actual": "6",
+      "passed": true
+    },
+    {
+      "check": "窗口内请求1通过",
+      "expected": "1",
+      "actual": "1",
+      "passed": true
+    },
+    {
+      "check": "窗口内请求2通过",
+      "expected": "1",
+      "actual": "1",
+      "passed": true
+    },
+    {
+      "check": "窗口内请求3限流",
+      "expected": "0",
+      "actual": "0",
+      "passed": true
+    },
+    {
+      "check": "独立请求标识保留两条记录",
+      "expected": "2",
+      "actual": "2",
+      "passed": true
+    }
+  ],
+  "failure": null,
+  "businessDataTouched": false,
+  "sourceFiles": [
+    "src/main/resources/seckill.lua",
+    "src/main/resources/release-reservation.lua",
+    "src/main/resources/lua/sliding-window-limit.lua"
+  ],
+  "sourceSha256": [
+    {
+      "file": "seckill.lua",
+      "sha256": "37DAAF017A794E0FBBA61F921B7214ED9F445BF425BFD7DC4FEED9B9639B105C"
+    },
+    {
+      "file": "release-reservation.lua",
+      "sha256": "177ADDE1A88A0211515DA70737B412E19EF78641B20EA05883CE225D3F6F7CD4"
+    },
+    {
+      "file": "lua/sliding-window-limit.lua",
+      "sha256": "5F935D4812ACDEBDE17B4DBEE2D858215F320DF3B28EA250DC41D00298BC9491"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "label": "hot_read",
+  "requests": 2000,
+  "sampleWindowMs": 1968.0,
+  "peakActiveJMeterThreads": 11.0,
+  "httpNon2xxCount": 0,
+  "httpNon2xxRatePercent": 0.0,
+  "http429Count": 0,
+  "http429RatePercent": 0.0,
+  "businessRejectionRatePercent": 0.0,
+  "rawJMeterFailureCount": 0,
+  "rawJMeterFailureRatePercent": 0.0,
+  "transportOrAssertionErrorsExcludingExpected429": 0,
+  "systemExceptionRatePercent": 0.0,
+  "averageMs": 1.78,
+  "p95Ms": 3.0,
+  "p99Ms": 5.0,
+  "maxMs": 23.0,
+  "requestThroughputPerSecond": 1016.26,
+  "businessOutcomes": {
+    "null": 2000
+  },
+  "rejectionMessages": {}
+}

@@ -1,0 +1,15 @@
+{
+  "scenario": "seckill",
+  "startedAt": "2026-10-21T16:35:06.9891936+08:00",
+  "host": "127.0.0.1",
+  "port": 18081,
+  "threads": 1,
+  "loops": 10,
+  "rampSeconds": 0,
+  "voucherId": 102,
+  "userBase": 20000000,
+  "path": "/voucher/list/1",
+  "jmeter": "5.6.3",
+  "serverCacheModeLabel": "caffeine",
+  "note": "本机闭环压测；登录单独统计。accepted 表示请求受理，不代表最终订单创建成功。"
+}

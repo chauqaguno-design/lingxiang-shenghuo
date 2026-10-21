@@ -1,0 +1,15 @@
+{
+  "scenario": "hot-read",
+  "startedAt": "2026-10-21T16:27:32.4563932+08:00",
+  "host": "127.0.0.1",
+  "port": 18081,
+  "threads": 20,
+  "loops": 100,
+  "rampSeconds": 2,
+  "voucherId": 101,
+  "userBase": 10000000,
+  "path": "/voucher/list/1",
+  "jmeter": "5.6.3",
+  "serverCacheModeLabel": "mysql",
+  "note": "本机闭环压测；登录单独统计。accepted 表示请求受理，不代表最终订单创建成功。"
+}

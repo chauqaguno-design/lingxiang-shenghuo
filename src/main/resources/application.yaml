@@ -1,0 +1,46 @@
+server:
+  address: ${APP_BIND_ADDRESS:127.0.0.1}
+  port: ${APP_PORT:18081}
+spring:
+  application:
+    name: linxiang-life
+  task:
+    scheduling:
+      pool:
+        size: 3
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${DB_URL:jdbc:mysql://127.0.0.1:13306/linxiang?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8}
+    username: ${DB_USER:linxiang}
+    password: ${DB_PASSWORD:}
+    hikari:
+      maximum-pool-size: 20
+  redis:
+    host: ${REDIS_HOST:127.0.0.1}
+    port: ${REDIS_PORT:16379}
+    password: ${REDIS_PASSWORD:}
+    timeout: 2s
+  jackson:
+    default-property-inclusion: non_null
+    time-zone: Asia/Shanghai
+mybatis-plus:
+  type-aliases-package: com.linxiang.entity
+rocketmq:
+  name-server: ${MQ_NAMESERVER:127.0.0.1:19876}
+  producer:
+    group: linxiang-producer
+    send-message-timeout: 3000
+app:
+  business-zone: Asia/Shanghai
+  demo-enabled: ${DEMO_ENABLED:false}
+  order:
+    ttl-seconds: ${ORDER_TTL_SECONDS:600}
+    close-delay-level: ${ORDER_CLOSE_DELAY_LEVEL:14}
+  voucher-cache:
+    mode: ${VOUCHER_CACHE_MODE:caffeine}
+  shop-cache:
+    hot-ids: ${HOT_SHOP_IDS:1}
+logging:
+  level:
+    com.linxiang: info
+    org.apache.rocketmq: warn

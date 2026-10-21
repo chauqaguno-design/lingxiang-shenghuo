@@ -1,0 +1,53 @@
+[
+  {
+    "label": "01_demo_login",
+    "requests": 50,
+    "sampleWindowMs": 1152.0,
+    "peakActiveJMeterThreads": 34.0,
+    "httpNon2xxCount": 0,
+    "httpNon2xxRatePercent": 0.0,
+    "http429Count": 0,
+    "http429RatePercent": 0.0,
+    "businessRejectionRatePercent": 0.0,
+    "rawJMeterFailureCount": 0,
+    "rawJMeterFailureRatePercent": 0.0,
+    "transportOrAssertionErrorsExcludingExpected429": 0,
+    "systemExceptionRatePercent": 0.0,
+    "averageMs": 86.26,
+    "p95Ms": 167.0,
+    "p99Ms": 168.0,
+    "maxMs": 168.0,
+    "requestThroughputPerSecond": 43.4,
+    "businessOutcomes": {
+      "login": 50
+    },
+    "rejectionMessages": {}
+  },
+  {
+    "label": "02_seckill",
+    "requests": 50,
+    "sampleWindowMs": 843.0,
+    "peakActiveJMeterThreads": 35.0,
+    "httpNon2xxCount": 0,
+    "httpNon2xxRatePercent": 0.0,
+    "http429Count": 0,
+    "http429RatePercent": 0.0,
+    "businessRejectionRatePercent": 40.0,
+    "rawJMeterFailureCount": 0,
+    "rawJMeterFailureRatePercent": 0.0,
+    "transportOrAssertionErrorsExcludingExpected429": 0,
+    "systemExceptionRatePercent": 0.0,
+    "averageMs": 111.58,
+    "p95Ms": 181.0,
+    "p99Ms": 189.0,
+    "maxMs": 189.0,
+    "requestThroughputPerSecond": 59.31,
+    "businessOutcomes": {
+      "accepted": 30,
+      "rejected": 20
+    },
+    "rejectionMessages": {
+      "优惠券已抢完": 20
+    }
+  }
+]
