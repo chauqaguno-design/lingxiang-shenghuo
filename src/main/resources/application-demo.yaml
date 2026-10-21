@@ -1,9 +1,0 @@
-# 仅限本机演示；此密码是公开的 Docker 演示密码。
-spring:
-  datasource:
-    password: ${DB_PASSWORD:linxiang_demo_password}
-app:
-  demo-enabled: true
-  order:
-    ttl-seconds: ${ORDER_TTL_SECONDS:60}
-    close-delay-level: ${ORDER_CLOSE_DELAY_LEVEL:5}

@@ -1,7 +1,12 @@
-name: tests
-on: [push, pull_request]
+name: Backend checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
 jobs:
-  unit:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -10,8 +15,6 @@ jobs:
           distribution: temurin
           java-version: '8'
           cache: maven
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-      - run: mvn -B clean verify
-      - run: node --test frontend/test/state.test.cjs
+      # 集成测试需要本地 MySQL、Redis；CI 先运行不依赖这些服务的单元测试。
+      - name: Test and package backend
+        run: mvn -B -Dtest=ShopBloomFilterTest,CacheClientBloomTest package

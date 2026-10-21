@@ -1,46 +1,54 @@
 server:
-  address: ${APP_BIND_ADDRESS:127.0.0.1}
-  port: ${APP_PORT:18081}
+  port: 8081
 spring:
   application:
-    name: linxiang-life
-  task:
-    scheduling:
-      pool:
-        size: 3
+    name: lingxiangshenghuo
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: ${DB_URL:jdbc:mysql://127.0.0.1:13306/linxiang?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8}
-    username: ${DB_USER:linxiang}
-    password: ${DB_PASSWORD:}
-    hikari:
-      maximum-pool-size: 20
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:13307/lingxiangshenghuo?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false
+    username: lingxiangshenghuo
+    password: 123456
   redis:
-    host: ${REDIS_HOST:127.0.0.1}
-    port: ${REDIS_PORT:16379}
-    password: ${REDIS_PASSWORD:}
-    timeout: 2s
+    host: localhost
+    port: 6379
+    lettuce:
+      pool:
+        max-active: 10
+        max-idle: 10
+        min-idle: 1
+        time-between-eviction-runs: 10s
   jackson:
-    default-property-inclusion: non_null
-    time-zone: Asia/Shanghai
+    default-property-inclusion: non_null # JSON处理时忽略非空字段
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /
+    listener:
+      simple:
+        # 方法正常结束后确认消息；抛出异常时由监听容器处理，不提前确认。
+        acknowledge-mode: auto
+
 mybatis-plus:
-  type-aliases-package: com.linxiang.entity
-rocketmq:
-  name-server: ${MQ_NAMESERVER:127.0.0.1:19876}
-  producer:
-    group: linxiang-producer
-    send-message-timeout: 3000
-app:
-  business-zone: Asia/Shanghai
-  demo-enabled: ${DEMO_ENABLED:false}
-  order:
-    ttl-seconds: ${ORDER_TTL_SECONDS:600}
-    close-delay-level: ${ORDER_CLOSE_DELAY_LEVEL:14}
-  voucher-cache:
-    mode: ${VOUCHER_CACHE_MODE:caffeine}
-  shop-cache:
-    hot-ids: ${HOT_SHOP_IDS:1}
+  type-aliases-package: com.lingxiangshenghuo.entity # 别名扫描包
+
+
 logging:
   level:
-    com.linxiang: info
-    org.apache.rocketmq: warn
+    com.lingxiangshenghuo: debug
+  pattern:
+    dateformat: mm:ss.SSS
+
+# 【秒杀优惠券信息多级缓存改造】本地缓存的配置项(刷新时间、过期时间)、Redis缓存的过期时间
+lingxiangshenghuo:
+  order:
+    # 超过 15 分钟未支付则关单，每 30 秒扫描一次。
+    timeout-minutes: 15
+    scan-interval-ms: 30000
+  cache:
+    voucher-list:
+      mode: mysql
+      refresh-after-write: 5s
+      expire-after-write: 10m
+      redis-ttl: 30m

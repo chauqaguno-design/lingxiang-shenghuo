@@ -32,16 +32,12 @@ build/
 ### VS Code ###
 .vscode/
 
-# Runtime data and local credentials
-loadtest/results/
-*.log
-*.jtl
-*.pid
+# 本机配置、运行数据和学习资料
 .env
 .env.*
-!.env.example
 uploads/
-*.zip
-
-# Reviewed public benchmark samples contain no tokens or request bodies
-!loadtest/evidence/**/samples.jtl
+*.log
+.cursor/
+AGENTS.md
+docs/
+frontend/
