@@ -3,7 +3,6 @@ package com.lingxiangshenghuo.utils;
 import cn.hutool.core.util.StrUtil;
 
 /**
- * @author 虎哥
  */
 public class RegexUtils {
     /**

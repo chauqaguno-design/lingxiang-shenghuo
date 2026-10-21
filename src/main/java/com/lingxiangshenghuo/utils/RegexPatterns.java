@@ -1,7 +1,6 @@
 package com.lingxiangshenghuo.utils;
 
 /**
- * @author 虎哥
  */
 public abstract class RegexPatterns {
     /**
