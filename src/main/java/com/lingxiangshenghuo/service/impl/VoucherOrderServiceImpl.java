@@ -11,8 +11,6 @@ import com.lingxiangshenghuo.service.IVoucherOrderService;
 import com.lingxiangshenghuo.utils.RedisIdWorker;
 import com.lingxiangshenghuo.utils.UserHolder;
 import lombok.extern.slf4j.Slf4j;
-import org.redisson.api.RLock;
-import org.redisson.api.RedissonClient;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.redis.connection.stream.*;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -40,8 +38,6 @@ public class VoucherOrderServiceImpl extends ServiceImpl<VoucherOrderMapper, Vou
     private ISeckillVoucherService seckillVoucherService;
     @Resource
     private RedisIdWorker redisIdWorker;
-    @Resource
-    private RedissonClient redissonClient;
     @Resource
     private StringRedisTemplate stringRedisTemplate;
     @Resource
@@ -91,36 +87,27 @@ public class VoucherOrderServiceImpl extends ServiceImpl<VoucherOrderMapper, Vou
         return Result.ok(orderId);
     }
 
+    @Override
+    @Transactional(rollbackFor = Exception.class)
     public void createVoucherOrder(VoucherOrder voucherOrder) {
-        Long userId = voucherOrder.getUserId();
-        Long voucherId = voucherOrder.getVoucherId();
-        // 创建锁对象
-        RLock redisLock = redissonClient.getLock("lock:order:" + userId);
-        // 尝试获取锁
-        boolean isLock = redisLock.tryLock();
-        // 判断
-        if (!isLock) {
-            // 获取锁失败，直接返回失败或者重试
-            log.error("不允许重复下单！");
+        // 1.同一个订单 ID 已处理过，直接结束。已取消的订单也不能重新创建。
+        if (getById(voucherOrder.getId()) != null) {
             return;
         }
 
-        try {
-            // 6.扣减库存
-            boolean success = seckillVoucherService.update()
-                    .setSql("stock = stock - 1") // set stock = stock - 1
-                    .eq("voucher_id", voucherId).gt("stock", 0) // where id = ? and stock > 0
-                    .update();
-            if (!success) {
-                // 扣减失败
-                log.error("库存不足！");
-                return;
-            }
-            // 7.创建订单
-            save(voucherOrder);
-        } finally {
-            // 释放锁
-            redisLock.unlock();
+        // 2.数据库库存大于 0 才能扣减，扣减失败就抛异常，不能当成消费成功。
+        boolean success = seckillVoucherService.update()
+                .setSql("stock = stock - 1")
+                .eq("voucher_id", voucherOrder.getVoucherId()).gt("stock", 0)
+                .update();
+        if (!success) {
+            throw new IllegalStateException("库存不足，创建订单失败，订单ID=" + voucherOrder.getId());
+        }
+
+        // 3.保存订单。与扣库存处于同一个事务，保存失败时库存也会回滚。
+        // 两条重复消息同时执行到这里时，由订单主键兜底，冲突的一次整体回滚。
+        if (!save(voucherOrder)) {
+            throw new IllegalStateException("保存订单失败，订单ID=" + voucherOrder.getId());
         }
     }
 
